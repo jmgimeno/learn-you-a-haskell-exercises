@@ -25,6 +25,9 @@ firstColour' = minBound :: Colour  -- using Bounded
 -- List the colours in reverse order
 reverseColourOrder = [Violet, Indigo ..]
 
+reverseColourOrder' :: (Enum t, Bounded t) => [t]
+reverseColourOrder' = enumFromThenTo maxBound (pred maxBound) minBound
+
 {-
  - Mix two colours together, to produce the average value of the two.
  - Example: paintMix Orange Green = Yellow
