@@ -62,8 +62,10 @@ piCalc :: (Fractional a, Integral b, Ord a) => a -> (a, b)
 piCalc a = piCalc' 1 0.0 a 0
 
 piCalc' :: (Ord a, Fractional a, Integral b) => a -> a -> a -> b -> (a, b)
-piCalc' w x y z = let term = 4 / w
-                      newPi = x + term
-                      error = abs term
-                      newDiv = if w < 0 then 2-w else (-2)-w
-                  in if (error < y) then (newPi, z) else piCalc' newDiv newPi y (z+1)
+piCalc' w x y z = let t  = 4 / w
+                      w' = - (w + 2 * signum w)
+                      x' = x + t
+                      z' = z + 1
+                  in if (abs t < y)
+                     then (x', z)
+                     else piCalc' w' x' y z'
